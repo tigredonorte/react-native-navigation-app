@@ -1,8 +1,7 @@
 import i18next from 'i18next';
 import { NativeModules, Platform } from 'react-native';
 
-import lang_pt from './pt-br.lang';
-import lang_en from './en.lang';
+import * as langs from './translations/index';
 
 void i18next.init(
   {
@@ -13,14 +12,14 @@ void i18next.init(
     lng: Platform.OS === 'ios' ?
       'pt' :
       NativeModules.I18nManager.localeIdentifier.slice(0, 2),
-    fallbackLng: [ 'en', 'pt' ],
+    fallbackLng: Object.keys(langs),
     load: 'currentOnly',
     resources: {
       'en': {
-        translation: lang_en,
+        translation: langs.en,
       },
       'pt': {
-        translation: lang_pt,
+        translation: langs.pt,
       },
     },
     nsSeparator: '::',

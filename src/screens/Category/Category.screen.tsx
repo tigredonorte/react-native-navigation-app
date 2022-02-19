@@ -1,25 +1,26 @@
 import { useObservable } from '@ngneat/react-rxjs';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Button } from 'react-native-paper';
-import { distinctUntilChanged } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs';
 import { i18n } from '~i18n';
+import { StackType } from '~routes/stack/stack';
 import { getScreenDimensions } from '~utils/responsiveness';
 
-import { CategoryScreenStyles } from './Category.styles';
+import { CategoryStyles } from './Category.styles';
 
-export interface CategoryScreenInput {
+export interface CategoryScreenInput extends NativeStackScreenProps<any> { }
 
-}
-
-export const CategoryScreen = (props: CategoryScreenInput) => {
-    const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
-    const Styles = CategoryScreenStyles(screenData);
+export const CategoryScreen: React.FunctionComponent<CategoryScreenInput> = (props: CategoryScreenInput) => {
+    const [ Styles ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged(), map(CategoryStyles)));
 
     return (
         <View style={Styles.container}>
             <Text>{i18n.t('Category.HelloWorld')}</Text>
-            <Button mode="contained" onPress={() => console.log('Pressed')}>{i18n.t('Category.Button')}</Button>
+            <Button mode="contained" onPress={() => props.navigation.navigate('Category/Meals', { categoryNumer: 1 })}>
+                {i18n.t('Category.GoToMeals')}
+            </Button>
         </View>
     );
 };

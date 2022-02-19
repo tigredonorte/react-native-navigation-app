@@ -6,9 +6,7 @@ import { MealDetailsScreen } from './MealDetails.screen';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export interface MealDetailsRouteParameter {
-
-}
+export type MealDetailsRouteParameter = { };
 
 export const MealDetailsRouteData = {
   getRoutes: () : React.ReactElement => {

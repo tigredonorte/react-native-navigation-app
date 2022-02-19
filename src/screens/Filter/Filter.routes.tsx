@@ -6,9 +6,7 @@ import { FilterScreen } from './Filter.screen';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export interface FilterRouteParameter {
-
-}
+export type FilterRouteParameter = { };
 
 export const FilterRouteData = {
   getRoutes: () : React.ReactElement => {

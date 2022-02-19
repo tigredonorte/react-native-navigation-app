@@ -1,6 +1,7 @@
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import { Colors } from '~constants/colors';
+import { StyleSheet, View } from 'react-native';
+import { Provider as PaperProvider, ActivityIndicator } from 'react-native-paper';
 import { Routes } from '~routes/routes';
+import { theme } from '~styles/theme';
 import { initStyle, loadFonts } from '~utils/style';
 
 export default function App() {
@@ -8,15 +9,19 @@ export default function App() {
   const [ appLoaded ] = loadFonts();
   if (!appLoaded) {
     return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color={Colors.primary} />
-      </View>
+      <PaperProvider theme={theme}>
+        <View style={styles.container}>
+          <ActivityIndicator size="large" />
+        </View>
+      </PaperProvider>
     );
   }
   initStyle();
 
   return (
-    <Routes></Routes>
+    <PaperProvider theme={theme}>
+      <Routes></Routes>
+    </PaperProvider>
   );
 }
 

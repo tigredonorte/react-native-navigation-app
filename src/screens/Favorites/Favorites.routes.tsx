@@ -6,9 +6,7 @@ import { FavoritesScreen } from './Favorites.screen';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export interface FavoritesRouteParameter {
-
-}
+export type FavoritesRouteParameter = { };
 
 export const FavoritesRouteData = {
   getRoutes: () : React.ReactElement => {

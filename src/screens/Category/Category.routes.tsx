@@ -6,9 +6,7 @@ import { CategoryMealsScreen } from './CategoryMeals/CategoryMeals.screen';
 
 const { Screen } = createStackNavigator();
 
-export interface CategoryRouteParameter {
-
-}
+export type CategoryRouteParameter = { };
 
 export const CategoryRouteData = {
   getRoutes: () : React.ReactElement => {

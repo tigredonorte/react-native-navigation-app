@@ -1,17 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
-import { i18n } from "~i18n";
+import { Text } from 'react-native';
+import { i18n } from '~i18n';
 
 interface LogoTitleInput {
     title: string;
 }
 
-export const LogoTitle = (props: LogoTitleInput) => {
+export const LogoTitle: React.FunctionComponent<LogoTitleInput> = (props: LogoTitleInput) => {
     return (
-        <Text>{i18n.t(props.title)}</Text>
+        <Text> {i18n.t(props.title)} </Text>
     );
 };
-
-const Style = StyleSheet.create({
-    container: {
-    }
-});

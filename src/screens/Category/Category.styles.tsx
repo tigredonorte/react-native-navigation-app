@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
-
+import { Colors } from '~styles/colors';
 import { ScreenData } from '~utils/responsiveness';
 
-export const CategoryScreenStyles = (screenData: ScreenData) => StyleSheet.create({
+export const CategoryStyles = (screenData: ScreenData) => StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
