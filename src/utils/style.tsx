@@ -1,4 +1,3 @@
-import * as Font from 'expo-font';
 import { setCustomText } from 'react-native-global-props';
 import {
     Lato_400Regular,
@@ -9,13 +8,6 @@ import {
 } from '@expo-google-fonts/lato';
 
 export const loadFonts = () => {
-    return Font.loadAsync({
-        'roboto': require('../../assets/fonts/Roboto-Regular.ttf'),
-        'roboto-bold': require('../../assets/fonts/Roboto-Bold.ttf'),
-    });
-}
-
-export const loadFontsGoogleFont = () => {
     return useFonts({
         Lato_400Regular,
         Lato_700Bold,

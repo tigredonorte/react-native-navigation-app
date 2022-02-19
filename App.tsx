@@ -1,17 +1,11 @@
 import AppLoading from 'expo-app-loading';
-import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { initStyle, loadFonts } from './src/utils/style';
+import { i18n } from '~i18n';
+import { initStyle, loadFonts } from '~utils/style';
 
 export default function App() {
 
-  const [ appLoaded, setAppLoaded ] = useState(false);
-
-  loadFonts().then(
-    () => setAppLoaded(true), 
-    () => setAppLoaded(true)
-  );
-
+  const [ appLoaded ] = loadFonts();
   if (!appLoaded) {
     return <AppLoading />;
   }
@@ -19,13 +13,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>olá mundo!</Text>
+      <Text>{i18n.t('HelloWorld')}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 });
