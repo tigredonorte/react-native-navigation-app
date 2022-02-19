@@ -1,8 +1,8 @@
 import i18next from 'i18next';
 import { NativeModules, Platform } from 'react-native';
 
-import * as lang_pt from './pt-br.lang.json';
-import * as lang_en from './en.lang.json';
+import lang_pt from './pt-br.lang';
+import lang_en from './en.lang';
 
 void i18next.init(
   {

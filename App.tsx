@@ -1,28 +1,28 @@
-import AppLoading from 'expo-app-loading';
-import { StyleSheet, Text, View } from 'react-native';
-import { i18n } from '~i18n';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { Colors } from '~constants/colors';
+import { Routes } from '~routes/routes';
 import { initStyle, loadFonts } from '~utils/style';
 
 export default function App() {
 
   const [ appLoaded ] = loadFonts();
   if (!appLoaded) {
-    return <AppLoading />;
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.primary} />
+      </View>
+    );
   }
   initStyle();
 
   return (
-    <View style={styles.container}>
-      <Text>{i18n.t('HelloWorld')}</Text>
-    </View>
+    <Routes></Routes>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center',
     justifyContent: 'center'
   },
 });
