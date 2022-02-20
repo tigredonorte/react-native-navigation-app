@@ -25,7 +25,7 @@ export const CategoryRouteData = {
             name='Category/Meals'
             component={CategoryMealsScreen}
             options={{
-              headerLeft: () => <LogoImage />,
+              // headerLeft: () => <LogoImage />,
               headerTitle: () => <LogoTitle title="CategoryMeals.title"/>,
               // headerRight: () => <BackButton navigationBackRoute='Home'></BackButton>,
             }}

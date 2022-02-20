@@ -3,16 +3,21 @@ import { pt } from "./pt.lang";
 export const en: typeof pt = {
   HelloWorld: "Hello World!",
   Category: {
-    title: "Categories screen",
-    HelloWorld: "Category screen works",
-    GoToMeals: 'Go to Meals Screen'
+    title: "Meals Categories",
+    Details: 'Details',
+    Status: {
+      Error: {
+        Title: 'Falha ao listar as categorias!',
+        TryAgain: 'Tente outra vez',
+      },
+      Empty: {
+        Title: 'Nenhuma categoria encontrada',
+        TryAgain: 'Cadastrar categoria',
+      }
+    }
   },
   CategoryMeals: {
-    title: "Category meals",
-    HelloWorld: "Category Meals screen {{num}} works",
-    GoToMeals: 'Go to Meal Details Screen',
-    AnotherCategory: 'Go to another Category',
-    GoBack: "Voltar",
+    EmptyTitle: "Category with id {{id}} not found!",
   },
   Favorites: {
     title: "Favorites",

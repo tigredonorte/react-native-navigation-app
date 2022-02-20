@@ -2,15 +2,20 @@ export const pt = {
   HelloWorld: "Olá mundo!",
   Category: {
     title: "Categorias",
-    HelloWorld: "A página de Categorias funciona!",
-    GoToMeals: 'Ir para a página de lista de receitas'
+    Details: 'Detalhes',
+    Status: {
+      Error: {
+        Title: 'Falha ao listar as categorias!',
+        TryAgain: 'Tente outra vez',
+      },
+      Empty: {
+        Title: 'Nenhuma categoria encontrada',
+        TryAgain: 'Cadastrar categoria',
+      }
+    }
   },
   CategoryMeals: {
-    title: "Receitas da categoria",
-    HelloWorld: "A página de Receitas de categoria {{num}} funciona! ",
-    GoToMeals: 'Ir para a página de detalhes da receita',
-    AnotherCategory: 'Ir para outra categoria',
-    GoBack: "Voltar",
+    EmptyTitle: "Categoria com o id {{id}} não encontrada!",
   },
   Favorites: {
     title: "Favoritos",

@@ -5,7 +5,6 @@ export const CategoryMealsScreenStyles = (screenData: ScreenData) => StyleSheet.
     container: {
         flex: 1,
         padding: 10,
-        alignItems: 'center',
-        justifyContent: 'flex-start'
+        width: '100%'
     }
 });
