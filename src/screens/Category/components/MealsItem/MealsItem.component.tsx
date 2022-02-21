@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { Button, Card, Chip, Title } from 'react-native-paper';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
+import { theme } from '~styles/theme';
 
 import { IMealModel } from '../../data/Meal.interface';
 import { ItemStyles } from './MealsItem.styles';
@@ -9,7 +10,7 @@ import { ItemStyles } from './MealsItem.styles';
 export interface MealItemInput {
     item: IMealModel;
     onPress: (id: string, source: string) => void;
-    color: string;
+    color?: string;
 }
 
 export const InfoChip = (props: { condition: boolean, title: string }) => {
@@ -44,7 +45,9 @@ export const MealItem: React.FunctionComponent<MealItemInput> = (props: MealItem
             </View>
             <Card.Actions>
                 <Button onPress={() => navigate('button')}>
-                    <TText style={{color: props.color}}>{i18n.t('MealDetails.ViewRecipe')}</TText>
+                    <TText style={{color: props?.color ?? theme.colors.primary}}>
+                        {i18n.t('MealDetails.ViewRecipe')}
+                    </TText>
                 </Button>
             </Card.Actions>
         </Card>

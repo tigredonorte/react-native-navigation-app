@@ -1,6 +1,6 @@
-import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Platform } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { LogoImage } from '~components/Navigation';
 import { TText } from '~components/TText/TText.component';
@@ -25,20 +25,19 @@ export const CategoryRouteData = () : React.ReactElement => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarIcon: ({ focused, color, size }) => {
-          let icon = (route.name === FavoriteRoutes.Favorites ? 'heart' : 'home');
-          return <IconButton
-            icon={icon}
-            color={color}
-            size={size}
-          />
+          const _color = focused ? theme.colors.primary: theme.colors.very_light_grey
+          return (
+            <IconButton
+              icon={route.name === FavoriteRoutes.Favorites ? 'heart' : 'home'}
+              color={_color}
+              size={size}
+            />
+          );
         },
     })}
     >
       <Tab.Screen
           name={CategoryRoutes.Category}
-          options={{
-            headerLeft: () => <LogoImage />,
-          }}
           component={CategoryGetRoutes}
       />
       <Tab.Screen
@@ -72,6 +71,9 @@ function CategoryGetRoutes() : React.ReactElement {
         <Stack.Screen
           name={CategoryRoutes.CategoryHome}
           component={CategoryScreen}
+          options={{
+            headerLeft: () => <LogoImage />,
+          }}
         />
         <Stack.Screen
           name={CategoryRoutes.Meals}
@@ -99,6 +101,9 @@ function FavoritesGetRoutes() : React.ReactElement {
         <Stack.Screen
           name={FavoriteRoutes.FavoritesHome}
           component={FavoritesScreen}
+          options={{
+            headerLeft: () => <LogoImage />,
+          }}
         />
       </Stack.Navigator>
   );

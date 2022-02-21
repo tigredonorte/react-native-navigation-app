@@ -49,7 +49,7 @@ export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> =
             },
         });
 
-        const mealsModel = new MealsModel();
+        const mealsModel = MealsModel.getInstance();
         setLoadingMeals(true);
         mealsModel.loadData(item?.id ?? '').subscribe(data => {
             setMeals(data);
