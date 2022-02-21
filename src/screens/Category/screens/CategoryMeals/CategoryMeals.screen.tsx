@@ -36,8 +36,8 @@ export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> =
     const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
     const Styles = CategoryMealsScreenStyles(screenData);
 
-    const navigate = (id: string) => {
-        props.navigation.navigate(CategoryRoutes.Meals, { id });
+    const navigate = (mealId: string) => {
+        props.navigation.navigate(CategoryRoutes.MealDetails, { mealId });
     }
 
     useEffect(() => {

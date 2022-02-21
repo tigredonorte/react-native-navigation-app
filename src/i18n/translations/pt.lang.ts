@@ -1,7 +1,9 @@
 export const pt = {
   HelloWorld: "Olá mundo!",
-  Category: {
+  ['Category/Home']: {
     title: "Categorias",
+  },
+  Category: {
     Details: 'Detalhes',
     Status: {
       Error: {
@@ -18,8 +20,10 @@ export const pt = {
     EmptyTitle: "Categoria com o id {{id}} não encontrada!",
     EmptyItems: "Não existem receitas para esta categoria"
   },
-  Favorites: {
+  ['Favorites/Home']: {
     title: "Favoritos",
+  },
+  Favorites: {
     HelloWorld: "A página de Favoritos funciona!"
   },
   Filters: {
@@ -28,7 +32,8 @@ export const pt = {
   },
   MealDetails: {
     title: "Detalhes da receita",
-    ViewRecipe: "Visualizar Receita"
+    ViewRecipe: "Visualizar Receita",
+    EmptyTitle: "Meal not found!",
   },
   Content: {
     affordability: {

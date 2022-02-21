@@ -2,8 +2,10 @@ import { pt } from "./pt.lang";
 
 export const en: typeof pt = {
   HelloWorld: "Hello World!",
-  Category: {
+  ['Category/Home']: {
     title: "Meals Categories",
+  },
+  Category: {
     Details: 'Details',
     Status: {
       Error: {
@@ -20,8 +22,10 @@ export const en: typeof pt = {
     EmptyTitle: "Category with id {{id}} not found!",
     EmptyItems: "There is no meals in this category"
   },
+  ['Favorites/Home']: {
+    title: "Favoritos",
+  },
   Favorites: {
-    title: "Favorites",
     HelloWorld: "Favorites screen works",
   },
   Filters: {
@@ -30,7 +34,8 @@ export const en: typeof pt = {
   },
   MealDetails: {
     title: "Meal Details",
-    ViewRecipe: "View Recipe"
+    EmptyTitle: "Meal not found!",
+    ViewRecipe: "View Recipe",
   },
   Content: {
     affordability: {
