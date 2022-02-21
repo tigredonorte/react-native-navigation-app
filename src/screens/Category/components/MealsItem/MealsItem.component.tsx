@@ -1,14 +1,14 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View } from 'react-native';
-import { Button, Card, Chip, Text, Title } from 'react-native-paper';
+import { Button, Card, Chip, Title } from 'react-native-paper';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 
 import { IMealModel } from '../../data/Meal.interface';
 import { ItemStyles } from './MealsItem.styles';
 
-export interface MealItemInput extends NativeStackScreenProps<any> {
+export interface MealItemInput {
     item: IMealModel;
+    onPress: (id: string, source: string) => void;
     color: string;
 }
 
@@ -23,9 +23,7 @@ export const InfoChip = (props: { condition: boolean, title: string }) => {
 export const MealItem: React.FunctionComponent<MealItemInput> = (props: MealItemInput) => {
 
     // @TODO() track it on analytics data
-    const navigate = (source: 'card' | 'button') => {
-        console.log(source);
-    }
+    const navigate = (source: string) => props.onPress(props.item.id, source);
 
     return (
         <Card style={ItemStyles.listItem}>

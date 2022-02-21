@@ -1,23 +1,23 @@
 import { useObservable } from '@ngneat/react-rxjs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native';
 import { Caption, Card } from 'react-native-paper';
 import { distinctUntilChanged } from 'rxjs';
 import { FetchStateEmpty } from '~components/FetchStatus/components/FetchStateEmpty';
 import { FetchStateLoading } from '~components/FetchStatus/components/FetchStateLoading';
 import { i18n } from '~i18n';
-import { MealItem } from '~screens/Category/components/MealsItem/MealsItem.component';
-import { IMealModel } from '~screens/Category/data/Meal.interface';
-import { MealsModel } from '~screens/Category/data/Meal.model';
+import { CategoryRoutes, CategoryStackType } from '~screens/Category/Category.route.types';
 import { getScreenDimensions } from '~utils/responsiveness';
 
+import { MealItem } from '../../components/MealsItem/MealsItem.component';
 import { ICategoryModel } from '../../data/Category.interface';
 import { getItemById } from '../../data/Category.mocks';
+import { IMealModel } from '../../data/Meal.interface';
+import { MealsModel } from '../../data/Meal.model';
 import { CategoryMealsScreenStyles } from './CategoryMeals.styles';
 
-export interface CategoryScreenInput extends NativeStackScreenProps<any> { }
+export interface CategoryScreenInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.Meals> { }
 
 export const CategoryHeader = (props: { item: ICategoryModel }) => {
     return (
@@ -35,6 +35,10 @@ export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> =
     const [ meals, setMeals ] = useState<IMealModel[]>([]);
     const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
     const Styles = CategoryMealsScreenStyles(screenData);
+
+    const navigate = (id: string) => {
+        props.navigation.navigate(CategoryRoutes.Meals, { id });
+    }
 
     useEffect(() => {
         const item = getItemById(props.route.params?.id);
@@ -87,11 +91,16 @@ export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> =
 
     return (
         <FlatList 
-            keyExtractor={(meal: IMealModel) => meal.id}
-            data={meals}
-            renderItem={(meal) => <MealItem {...props} item={meal.item} color={item.color} />}
             numColumns={1}
+            data={meals}
+            keyExtractor={(meal: IMealModel) => meal.id}
             ListHeaderComponent={() => (<CategoryHeader item={item} />)}
+            renderItem={(meal) => <MealItem
+                item={meal.item} 
+                color={item.color} 
+                onPress={navigate}
+            />
+        }
         />
     );
 };

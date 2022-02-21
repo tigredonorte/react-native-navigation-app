@@ -6,12 +6,13 @@ import { Text } from 'react-native-paper';
 import { distinctUntilChanged } from 'rxjs';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
+import { CategoryRoutes, CategoryStackType } from '~screens/Category/Category.route.types';
 import { getScreenDimensions } from '~utils/responsiveness';
 import { FilterScreenStyles } from './Filter.styles';
 
-export interface CategoryScreenInput extends NativeStackScreenProps<any> { }
+export interface FilterScreenInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.Filter> { }
 
-export const FilterScreen: React.FunctionComponent<CategoryScreenInput> = (props: CategoryScreenInput) => {
+export const FilterScreen: React.FunctionComponent<FilterScreenInput> = (props: FilterScreenInput) => {
     
     const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
     const Styles = FilterScreenStyles(screenData);

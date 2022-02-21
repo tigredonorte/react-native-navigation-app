@@ -9,14 +9,6 @@ import { MealDetailsScreen } from './screens/MealDetails/MealDetails.screen';
 
 const { Screen } = createStackNavigator();
 
-export type CategoryStackType = {
-  Category: {},
-  ['Category/Meals']: {},
-  ['Category/MealDetails']: {},
-  ['Category/Filter']: {},
-  ['Category/Favorites']: {}
-};
-
 export const CategoryRouteData = {
   getRoutes: () : React.ReactElement => {
     return (
@@ -33,17 +25,17 @@ export const CategoryRouteData = {
             component={CategoryMealsScreen}
           />
            <Screen
-            name='MealDetails'
+            name='Category/MealDetails'
             component={MealDetailsScreen}
           />
 
           <Screen
-            name='Filter'
+            name='Category/Filter'
             component={FilterScreen}
           />
 
           <Screen
-            name='Favorites'
+            name='Category/Favorites'
             component={FavoritesScreen}
           />
         </>

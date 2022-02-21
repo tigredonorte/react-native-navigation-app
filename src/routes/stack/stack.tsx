@@ -2,7 +2,8 @@ import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-na
 import React from 'react';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
-import { CategoryRouteData, CategoryStackType } from '~screens/Category/Category.routes';
+import { CategoryStackType } from '~screens/Category/Category.route.types';
+import { CategoryRouteData } from '~screens/Category/Category.routes';
 import { theme } from '~styles/theme';
 
 export type StackType = CategoryStackType;
