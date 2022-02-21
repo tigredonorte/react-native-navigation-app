@@ -12,15 +12,7 @@ export const FavoritesRouteData = {
   getRoutes: () : React.ReactElement => {
     return (
         <>
-          <Screen
-            name='Favorites'
-            component={FavoritesScreen}
-            options={{
-              headerLeft: () => <LogoImage />,
-              headerTitle: () => <LogoTitle title="Favorites.title"/>,
-              // headerRight: () => <BackButton navigationBackRoute='Home'></BackButton>,
-            }}
-          />
+          
         </>
     );
   } 

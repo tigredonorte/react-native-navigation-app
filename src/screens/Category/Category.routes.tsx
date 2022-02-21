@@ -1,12 +1,21 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { BackButton, LogoImage, LogoTitle } from '~components/Navigation';
+import { LogoImage } from '~components/Navigation';
 
-import { CategoryScreen } from './Category.screen';
-import { CategoryMealsScreen } from './CategoryMeals/CategoryMeals.screen';
+import { CategoryScreen } from './screens/Category/Category.screen';
+import { CategoryMealsScreen } from './screens/CategoryMeals/CategoryMeals.screen';
+import { FavoritesScreen } from './screens/Favorites/Favorites.screen';
+import { FilterScreen } from './screens/Filter/Filter.screen';
+import { MealDetailsScreen } from './screens/MealDetails/MealDetails.screen';
 
 const { Screen } = createStackNavigator();
 
-export type CategoryRouteParameter = { };
+export type CategoryStackType = {
+  Category: {},
+  ['Category/Meals']: {},
+  ['Category/MealDetails']: {},
+  ['Category/Filter']: {},
+  ['Category/Favorites']: {}
+};
 
 export const CategoryRouteData = {
   getRoutes: () : React.ReactElement => {
@@ -17,18 +26,25 @@ export const CategoryRouteData = {
             component={CategoryScreen}
             options={{
               headerLeft: () => <LogoImage />,
-              headerTitle: () => <LogoTitle title="Category.title"/>,
-              headerRight: () => <BackButton navigationBackRoute='Category/Meals'></BackButton>,
             }}
           />
           <Screen
             name='Category/Meals'
             component={CategoryMealsScreen}
-            options={{
-              // headerLeft: () => <LogoImage />,
-              headerTitle: () => <LogoTitle title="CategoryMeals.title"/>,
-              // headerRight: () => <BackButton navigationBackRoute='Home'></BackButton>,
-            }}
+          />
+           <Screen
+            name='MealDetails'
+            component={MealDetailsScreen}
+          />
+
+          <Screen
+            name='Filter'
+            component={FilterScreen}
+          />
+
+          <Screen
+            name='Favorites'
+            component={FavoritesScreen}
           />
         </>
     );

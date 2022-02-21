@@ -18,6 +18,7 @@ export const en: typeof pt = {
   },
   CategoryMeals: {
     EmptyTitle: "Category with id {{id}} not found!",
+    EmptyItems: "There is no meals in this category"
   },
   Favorites: {
     title: "Favorites",
@@ -29,9 +30,30 @@ export const en: typeof pt = {
   },
   MealDetails: {
     title: "Meal Details",
-    HelloWorld: "MealDetails screen works",
-    GoToMeals: "Open another recipe",
-    GoBack: 'Last Recipe',
-    GoBackAll: 'Back to the begining'
+    ViewRecipe: "View Recipe"
+  },
+  Content: {
+    affordability: {
+      title: 'Affordability',
+      affordable: 'Affordable',
+      pricey: 'Pricey',
+      luxurious: 'Luxurious'
+    },
+    complexity: {
+      title: 'Complexity',
+      simple: 'Simple',
+      challenging: 'Challenging',
+      hard: 'Hard',
+    },
+    duration: {
+      title: 'Duration',
+      minutes: 'minutes'
+    },
+    Labels: {
+      GlutenFree: 'Gluten Free',
+      Vegan: 'Vegan',
+      Vegetarian: 'Vegetarian',
+      LactoseFree: 'Lactose Free',
+    }
   }
 }

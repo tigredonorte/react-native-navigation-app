@@ -1,5 +1,6 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Button } from 'react-native-paper';
+import { TText } from '~components/TText/TText.component';
 
 import { Styles } from './FetchState.style';
 
@@ -14,9 +15,9 @@ export const FetchStateEmpty = (props: FetchStateEmptyInput) => {
         <View style={Styles.stateContainer}>
             { 
                 props.emptyText ? 
-                    <Text style={Styles.emptyText}> 
+                    <TText style={Styles.emptyText}> 
                         {props.emptyText} 
-                    </Text> : null
+                    </TText> : null
             }
             { 
                 props.emptyBtnText ?

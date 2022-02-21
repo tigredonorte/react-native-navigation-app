@@ -16,6 +16,7 @@ export const pt = {
   },
   CategoryMeals: {
     EmptyTitle: "Categoria com o id {{id}} não encontrada!",
+    EmptyItems: "Não existem receitas para esta categoria"
   },
   Favorites: {
     title: "Favoritos",
@@ -27,9 +28,30 @@ export const pt = {
   },
   MealDetails: {
     title: "Detalhes da receita",
-    HelloWorld: "A página de Detalhes da receita funciona!",
-    GoToMeals: "Abrir outra receita",
-    GoBack: 'Receita anterior',
-    GoBackAll: 'Voltar ao início'
+    ViewRecipe: "Visualizar Receita"
+  },
+  Content: {
+    affordability: {
+      title: 'Custo',
+      affordable: 'Acessível',
+      pricey: 'Caro',
+      luxurious: 'Luxuoso'
+    },
+    complexity: {
+      title: 'Complexidade',
+      simple: 'Simples',
+      challenging: 'Desafiador',
+      hard: 'Difícil',
+    },
+    duration: {
+      title: 'Duração',
+      minutes: 'minutos'
+    },
+    Labels: {
+      GlutenFree: 'Sem Glútem',
+      Vegan: 'Vegano',
+      Vegetarian: 'Vegetariano',
+      LactoseFree: 'Sem Lactose',
+    }
   }
 }

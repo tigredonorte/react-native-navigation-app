@@ -1,4 +1,4 @@
-import { Text } from 'react-native';
+import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 
 interface LogoTitleInput {
@@ -8,6 +8,6 @@ interface LogoTitleInput {
 
 export const LogoTitle: React.FunctionComponent<LogoTitleInput> = (props: LogoTitleInput) => {
     return (
-        <Text style={props.style}> {i18n.t(props.title)} </Text>
+        <TText style={props.style}> {i18n.t(props.title)} </TText>
     );
 };

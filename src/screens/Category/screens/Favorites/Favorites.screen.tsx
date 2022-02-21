@@ -1,8 +1,10 @@
 import { useObservable } from '@ngneat/react-rxjs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Text } from 'react-native-paper';
 import { distinctUntilChanged } from 'rxjs';
+import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 import { getScreenDimensions } from '~utils/responsiveness';
 import { FavoritesStyles } from './Favorites.styles';
@@ -16,7 +18,7 @@ export const FavoritesScreen: React.FunctionComponent<FavoriteInput> = (props: F
 
     return (
         <View style={Styles.container}>
-            <Text>{i18n.t('Favorites.HelloWorld')}</Text>
+            <TText>{i18n.t('Favorites.HelloWorld')}</TText>
         </View>
     );
 };

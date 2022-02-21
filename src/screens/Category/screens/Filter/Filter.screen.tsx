@@ -1,8 +1,10 @@
 import { useObservable } from '@ngneat/react-rxjs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Text } from 'react-native-paper';
 import { distinctUntilChanged } from 'rxjs';
+import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 import { getScreenDimensions } from '~utils/responsiveness';
 import { FilterScreenStyles } from './Filter.styles';
@@ -15,7 +17,7 @@ export const FilterScreen: React.FunctionComponent<CategoryScreenInput> = (props
     const Styles = FilterScreenStyles(screenData);
     return (
         <View style={Styles.container}>
-            <Text>{i18n.t('Filters.HelloWorld')}</Text>
+            <TText>{i18n.t('Filters.HelloWorld')}</TText> 
         </View>
     );
 };

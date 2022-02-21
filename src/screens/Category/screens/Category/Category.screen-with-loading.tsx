@@ -1,16 +1,12 @@
-import { useObservable } from '@ngneat/react-rxjs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { distinctUntilChanged, map } from 'rxjs';
-import { FetchStateContainer, FetchStateInput } from '~components/FetchStatus/FetchStateContainer';
-import { i18n } from '~i18n';
-import { getScreenDimensions } from '~utils/responsiveness';
+import { FlatList, View } from 'react-native';
+import { TText } from '~components/TText/TText.component';
 
+import { ICategoryModel } from '../../data/Category.interface';
+import { CategoryListMock } from '../../data/Category.mocks';
+import { CategoryModel } from '../../data/Category.model';
 import { CategoryStyles } from './Category.styles';
-import { ICategoryModel } from './data/Category.interface';
-import { CategoryListMock } from './data/Category.mocks';
-import { CategoryModel } from './data/Category.model';
 
 export interface CategoryScreenInput extends NativeStackScreenProps<any> { }
 
@@ -32,7 +28,7 @@ export const CategoryScreen: React.FunctionComponent<CategoryScreenInput> = (pro
     //     }
     // }
 
-    const renderListItem = (item: any) => <View style={Styles.itemContainer}><Text>{item.title}</Text></View>;
+    const renderListItem = (item: any) => <View style={Styles.listContainer}><TText>{item.title}</TText></View>;
 
     return (
         // <FetchStateContainer {...input}>
