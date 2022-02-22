@@ -7,5 +7,18 @@ export const FilterScreenStyles = (screenData: ScreenData) => StyleSheet.create(
         padding: 10,
         alignItems: 'center',
         justifyContent: 'flex-start'
+    },
+    formSection: {
+        padding: 20,
+        width: '80%',
+    }
+});
+
+export const SwitchStyle = StyleSheet.create({
+    switch: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '80%',
     }
 });

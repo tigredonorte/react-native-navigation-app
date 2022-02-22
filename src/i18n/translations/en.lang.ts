@@ -34,7 +34,7 @@ export const en: typeof pt = {
   },
   Filter: {
     Title: "Filters",
-    HelloWorld: "Filter screen works",
+    PageTitle: "Search the recipe"
   },
   MealDetails: {
     title: "Meal Details",

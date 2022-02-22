@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View } from 'react-native';
-import { IconButton } from 'react-native-paper';
+import { IconButton, Provider } from 'react-native-paper';
 import { LogoImage } from '~components/Navigation';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
@@ -40,7 +40,7 @@ export const CategoryRouteData = () : React.ReactElement => {
           component={FilterGetRoutes}
           options={() => ({
             title: i18n.t('Filter.Title'),
-            drawerIcon: ({ size, color }): React.ReactNode => (<IconButton icon='home' size={20} color={color}/>)
+            drawerIcon: ({ size, color }): React.ReactNode => (<IconButton icon='filter' size={20} color={color}/>)
           })}
         />
       </Drawer.Navigator>
@@ -83,7 +83,7 @@ function HomeGetRoutes() : React.ReactElement {
 const screenOptions = ({ navigation }: any) => ({
   headerLeft: () => (
     <View style={{flexDirection: 'row'}}>
-      <IconButton icon='menu' onPress={() => navigation.openDrawer()} />
+      <IconButton icon='menu' color={theme.colors.light_grey} onPress={() => navigation.openDrawer()} />
       <LogoImage />
     </View>
   ),
@@ -124,15 +124,17 @@ function FavoritesGetRoutes() : React.ReactElement {
 
 function FilterGetRoutes() : React.ReactElement {
   return (
-    <Stack.Navigator
-      screenOptions={defaultScreenOptions}
-      initialRouteName={FilterRoutes.FilterHome}
-    >
-        <Stack.Screen
-          name={FilterRoutes.FilterHome}
-          component={FilterScreen}
-          options={screenOptions}
-        />
-      </Stack.Navigator>
+    <Provider theme={theme}>
+      <Stack.Navigator
+        screenOptions={defaultScreenOptions}
+        initialRouteName={FilterRoutes.FilterHome}
+      >
+          <Stack.Screen
+            name={FilterRoutes.FilterHome}
+            component={FilterScreen}
+            options={screenOptions}
+          />
+        </Stack.Navigator>
+    </Provider>
   );
 }

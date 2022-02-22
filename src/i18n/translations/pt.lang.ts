@@ -32,7 +32,7 @@ export const pt = {
   },
   Filter: {
     Title: "Filtros",
-    HelloWorld: "A página de Filtros funciona!"
+    PageTitle: "Buscar Receita"
   },
   MealDetails: {
     title: "Detalhes da receita",
