@@ -23,7 +23,6 @@ export const InfoChip = (props: { condition: boolean, title: string }) => {
 
 export const MealItem: React.FunctionComponent<MealItemInput> = (props: MealItemInput) => {
 
-    // @TODO() track it on analytics data
     const navigate = (source: string) => props.onPress(props.item.id, source);
 
     return (

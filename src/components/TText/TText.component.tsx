@@ -5,9 +5,7 @@ export interface TTextInput {
     children: any;
 }
 
-
 export const TText: React.FunctionComponent<TTextInput> = (props: TTextInput) => {
-    
     return ( 
         <>
             {

@@ -39,7 +39,6 @@ export const FetchStateContainer: React.FunctionComponent<FetchStateInput> = (pr
 
     useEffect(() => loadData());
     useEffect(() => {
-        console.log('unsubscribe!');
         if (subscription) {
             subscription.unsubscribe();
         }

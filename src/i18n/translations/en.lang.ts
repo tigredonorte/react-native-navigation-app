@@ -40,6 +40,8 @@ export const en: typeof pt = {
     title: "Meal Details",
     EmptyTitle: "Meal not found!",
     ViewRecipe: "View Recipe",
+    Ingredients: "Ingredients",
+    Steps: "Steps",
   },
   Content: {
     affordability: {

@@ -1,20 +1,22 @@
 import { useObservable } from '@ngneat/react-rxjs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
-import { IconButton, Title } from 'react-native-paper';
+import { ScrollView, View } from 'react-native';
+import { Caption, Card, Headline, IconButton, Subheading, Title } from 'react-native-paper';
 import { distinctUntilChanged } from 'rxjs';
 import { FetchStateEmpty } from '~components/FetchStatus/components/FetchStateEmpty';
 import { FetchStateLoading } from '~components/FetchStatus/components/FetchStateLoading';
 import { LogoImage } from '~components/Navigation';
+import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
+import { InfoChip } from '~screens/Category/components/MealsItem/MealsItem.component';
 import { theme } from '~styles/theme';
 import { getScreenDimensions } from '~utils/responsiveness';
 
 import { CategoryRoutes, CategoryStackType } from '../../Category.route.types';
 import { IMealModel } from '../../data/Meal.interface';
 import { MealsModel } from '../../data/Meal.model';
-import { MealDetailsScreenStyles } from './MealDetails.styles';
+import { ListStyles, MealDetailsScreenStyles } from './MealDetails.styles';
 
 export interface MealDetailsInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.MealDetails> {
 
@@ -36,6 +38,22 @@ export const Favorite = (props: { mealId: string }) => {
             }}
         />
     );
+}
+
+const RenderList = (props: { items: string[]; title: string; numbered?: boolean }) => {
+    return (
+        <View style={ListStyles.section}>
+            <Subheading>{i18n.t(props.title)}</Subheading>
+            <View style={ListStyles.content}>
+                { props.items.map((item, i) => (
+                    <TText style={ListStyles.textContainer} key={i} >
+                        <TText style={ListStyles.text}>{ props.numbered ? `${i + 1}. ` : '\u2022 '}</TText> 
+                        <TText style={ListStyles.text}>{item}</TText>
+                    </TText>
+                ))}
+            </View>
+        </View>
+    )
 }
 
 export const MealDetailsScreen: React.FunctionComponent<MealDetailsInput> = (props: MealDetailsInput) => {
@@ -75,7 +93,23 @@ export const MealDetailsScreen: React.FunctionComponent<MealDetailsInput> = (pro
 
     return (
         <ScrollView contentContainerStyle={Styles.container}>
-            <Title>{meal.title}</Title>
+            <View style={{width: '100%'}}>
+                <Title style={Styles.textStyle}>{meal.title}</Title>
+                <Card.Cover source={{uri: meal.imageUrl}} />
+            </View>
+            <View style={Styles.detailsSection}>
+                <TText>{ i18n.t(`Content.affordability.${meal.affordability}`) }</TText>
+                <TText>{ i18n.t(`Content.complexity.${meal.complexity}`) } </TText>
+                <TText>{ meal.duration } { i18n.t('Content.duration.minutes')}</TText>
+            </View>
+            <View style={Styles.chipContainer}>
+                <InfoChip condition={meal.isGlutenFreen} title='GlutenFree' />
+                <InfoChip condition={meal.isVegan} title='Vegan' />
+                <InfoChip condition={meal.isVegetarian} title='Vegetarian' />
+                <InfoChip condition={meal.isLactoseFree} title='LactoseFree' />
+            </View>
+            <RenderList title='MealDetails.Ingredients' items={meal.ingredients}/>
+            <RenderList title='MealDetails.Steps' items={meal.steps} numbered={true}/>
         </ScrollView>
     );
 };

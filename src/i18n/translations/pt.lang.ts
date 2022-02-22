@@ -38,6 +38,8 @@ export const pt = {
     title: "Detalhes da receita",
     ViewRecipe: "Visualizar Receita",
     EmptyTitle: "Meal not found!",
+    Ingredients: "Ingredientes",
+    Steps: "Modo de Preparo",
   },
   Content: {
     affordability: {
