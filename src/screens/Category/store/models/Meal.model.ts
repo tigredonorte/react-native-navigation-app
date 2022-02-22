@@ -1,4 +1,4 @@
-export interface IMealModel {
+export interface MealModel {
     id: string;
     categoryIds: string[];
     title: string;

@@ -3,11 +3,11 @@ import { Button, Card, Text } from 'react-native-paper';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 
-import { ICategoryModel } from '../../data/Category.interface';
+import { CategoryModel } from '../../store/models/Category.model';
 import { ItemStyles } from './CategoryItem.styles';
 
 export interface CategoryItemInput {
-    item: ICategoryModel;
+    item: CategoryModel;
     onClick: (id: string, source: string) => void
 }
 

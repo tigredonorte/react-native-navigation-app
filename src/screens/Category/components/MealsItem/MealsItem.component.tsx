@@ -4,11 +4,11 @@ import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 import { theme } from '~styles/theme';
 
-import { IMealModel } from '../../data/Meal.interface';
+import { MealModel } from '../../store/models/Meal.model';
 import { ItemStyles } from './MealsItem.styles';
 
 export interface MealItemInput {
-    item: IMealModel;
+    item: MealModel;
     onPress: (id: string, source: string) => void;
     color?: string;
 }

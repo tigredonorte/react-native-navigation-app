@@ -1,6 +1,6 @@
-import { IMealModel } from "./Meal.interface";
+import { MealModel } from "../models/Meal.model";
 
-export const MealsListMock: IMealModel[] = [
+export const MealsListMock: MealModel[] = [
     {
       id: 'm1',
       categoryIds: ['c1', 'c2'],

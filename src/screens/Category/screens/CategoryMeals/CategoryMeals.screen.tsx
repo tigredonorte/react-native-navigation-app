@@ -11,15 +11,15 @@ import { CategoryRoutes, CategoryStackType } from '~screens/Category/Category.ro
 import { getScreenDimensions } from '~utils/responsiveness';
 
 import { MealItem } from '../../components/MealsItem/MealsItem.component';
-import { ICategoryModel } from '../../data/Category.interface';
-import { getItemById } from '../../data/Category.mocks';
-import { IMealModel } from '../../data/Meal.interface';
-import { MealsModel } from '../../data/Meal.model';
+import { CategoryModel } from '../../store/models/Category.model';
+import { getItemById } from '../../store/data/Category.mocks';
+import { MealModel } from '../../store/models/Meal.model';
+import { MealsService } from '../../store/services/Meal.service';
 import { CategoryMealsScreenStyles } from './CategoryMeals.styles';
 
 export interface CategoryScreenInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.Meals> { }
 
-export const CategoryHeader = (props: { item: ICategoryModel }) => {
+export const CategoryHeader = (props: { item: CategoryModel }) => {
     return (
         <Card>
             <Card.Cover source={props.item.img} style={{height: 100}} />
@@ -30,9 +30,9 @@ export const CategoryHeader = (props: { item: ICategoryModel }) => {
 
 export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> = (props: CategoryScreenInput) => {
     
-    const [ item, setItem ] = useState<ICategoryModel>();
+    const [ item, setItem ] = useState<CategoryModel>();
     const [ loadingMeals, setLoadingMeals ] = useState<boolean>(true);
-    const [ meals, setMeals ] = useState<IMealModel[]>([]);
+    const [ meals, setMeals ] = useState<MealModel[]>([]);
     const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
     const Styles = CategoryMealsScreenStyles(screenData);
 
@@ -49,7 +49,7 @@ export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> =
             },
         });
 
-        const mealsModel = MealsModel.getInstance();
+        const mealsModel = MealsService.getInstance();
         setLoadingMeals(true);
         mealsModel.loadData(item?.id ?? '').subscribe(data => {
             setMeals(data);
@@ -93,7 +93,7 @@ export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> =
         <FlatList 
             numColumns={1}
             data={meals}
-            keyExtractor={(meal: IMealModel) => meal.id}
+            keyExtractor={(meal: MealModel) => meal.id}
             ListHeaderComponent={() => (<CategoryHeader item={item} />)}
             renderItem={(meal) => <MealItem
                 item={meal.item} 

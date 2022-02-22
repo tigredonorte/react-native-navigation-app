@@ -8,8 +8,8 @@ import { FetchStateLoading } from '~components/FetchStatus/components/FetchState
 import { i18n } from '~i18n';
 import { CategoryRoutes, CategoryStackType, FavoriteRoutes } from '~screens/Category/Category.route.types';
 import { MealItem } from '~screens/Category/components/MealsItem/MealsItem.component';
-import { IMealModel } from '~screens/Category/data/Meal.interface';
-import { MealsModel } from '~screens/Category/data/Meal.model';
+import { MealModel } from '~screens/Category/store/models/Meal.model';
+import { MealsService } from '~screens/Category/store/services/Meal.service';
 import { getScreenDimensions } from '~utils/responsiveness';
 
 import { FavoritesStyles } from './Favorites.styles';
@@ -20,7 +20,7 @@ export const FavoritesScreen: React.FunctionComponent<FavoritesInput> = (props: 
 
     const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
     const [ loading, setLoading ] = useState(true);
-    const [ favorites, setFavorites ] = useState<IMealModel[]>([]);
+    const [ favorites, setFavorites ] = useState<MealModel[]>([]);
     const Styles = FavoritesStyles(screenData);
     
     const navigate = (mealId: string) => {
@@ -29,7 +29,7 @@ export const FavoritesScreen: React.FunctionComponent<FavoritesInput> = (props: 
     
     useEffect(() => {
         setLoading(true);
-        const model = MealsModel.getInstance();
+        const model = MealsService.getInstance();
         (async () => {
             (await model.getFavorites()).subscribe((
                 (favorites) => {
@@ -57,7 +57,7 @@ export const FavoritesScreen: React.FunctionComponent<FavoritesInput> = (props: 
         <FlatList 
             numColumns={1}
             data={favorites}
-            keyExtractor={(meal: IMealModel) => meal.id}
+            keyExtractor={(meal: MealModel) => meal.id}
             renderItem={(meal) => <MealItem
                 item={meal.item} 
                 onPress={navigate}

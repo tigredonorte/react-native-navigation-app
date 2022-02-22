@@ -4,6 +4,16 @@ import { enableScreens } from 'react-native-screens';
 import { Routes } from '~routes/routes';
 import { theme } from '~styles/theme';
 import { initStyle, loadFonts } from '~utils/style';
+import { Provider as ReduxProvider } from 'react-redux';
+
+import { createStore, combineReducers } from 'redux';
+import { mealsReducer } from '~screens/Category/store/reducers/meals.reducer';
+
+const store = createStore(
+  combineReducers({
+    meals: mealsReducer
+  })
+);
 
 /**
  * It's important on huge app to improve performance
@@ -26,7 +36,9 @@ export default function App() {
 
   return (
     <PaperProvider theme={theme}>
-      <Routes></Routes>
+      <ReduxProvider store={store}>
+        <Routes></Routes>
+      </ReduxProvider>
     </PaperProvider>
   );
 }

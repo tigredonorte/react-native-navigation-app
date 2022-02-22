@@ -1,6 +1,6 @@
-import { ICategoryModel } from './Category.interface';
+import { CategoryModel } from '../models/Category.model';
 
-export const CategoryListMock: ICategoryModel[] = [
+export const CategoryListMock: CategoryModel[] = [
     { id: 'c5', title: 'Brazilian', subtitle: 'Traditional Brazilianrs food', color: '#d25798', img: require('~assets/food/brazilian.jpg')},
     { id: 'c1', title: 'Italian', subtitle: 'spaghetti and pasta', color: '#258101', img: require('~assets/food/italian.jpg')},
     { id: 'c2', title: 'Thai', subtitle: 'Spycy exotic food', color: '#9801dd', img: require('~assets/food/thai.jpg')},

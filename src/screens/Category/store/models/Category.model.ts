@@ -1,6 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 
-export interface ICategoryModel {
+export interface CategoryModel {
     id: string;
     title: string;
     subtitle: string;

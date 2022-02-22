@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { TText } from '~components/TText/TText.component';
 
-import { ICategoryModel } from '../../data/Category.interface';
-import { CategoryListMock } from '../../data/Category.mocks';
-import { CategoryModel } from '../../data/Category.model';
+import { CategoryModel } from '../../store/models/Category.model';
+import { CategoryListMock } from '../../store/data/Category.mocks';
+import { CategoryService } from '../../store/services/Category.service';
 import { CategoryStyles } from './Category.styles';
 
 export interface CategoryScreenInput extends NativeStackScreenProps<any> { }
@@ -13,10 +13,10 @@ export interface CategoryScreenInput extends NativeStackScreenProps<any> { }
 
 export const CategoryScreen: React.FunctionComponent<CategoryScreenInput> = (props: CategoryScreenInput) => {
 
-    const model = new CategoryModel();
+    const model = new CategoryService();
     // const [ Styles ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged(), map(CategoryStyles)));
     const Styles = CategoryStyles;
-    const [ data, setData ] = useState<ICategoryModel[]>(CategoryListMock);
+    const [ data, setData ] = useState<CategoryModel[]>(CategoryListMock);
     
     // const input: FetchStateInput = {
     //     fetchDataFn: model.loadData,
@@ -33,7 +33,7 @@ export const CategoryScreen: React.FunctionComponent<CategoryScreenInput> = (pro
     return (
         // <FetchStateContainer {...input}>
             <FlatList 
-                keyExtractor={(item: ICategoryModel) => item.id}
+                keyExtractor={(item: CategoryModel) => item.id}
                 data={data}
                 renderItem={(item) => renderListItem(item.item)}
                 numColumns={2}

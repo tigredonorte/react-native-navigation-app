@@ -14,8 +14,8 @@ import { theme } from '~styles/theme';
 import { getScreenDimensions } from '~utils/responsiveness';
 
 import { CategoryRoutes, CategoryStackType } from '../../Category.route.types';
-import { IMealModel } from '../../data/Meal.interface';
-import { MealsModel } from '../../data/Meal.model';
+import { MealModel } from '../../store/models/Meal.model';
+import { MealsService } from '../../store/services/Meal.service';
 import { ListStyles, MealDetailsScreenStyles } from './MealDetails.styles';
 
 export interface MealDetailsInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.MealDetails> {
@@ -23,7 +23,7 @@ export interface MealDetailsInput extends NativeStackScreenProps<CategoryStackTy
 }
 
 export const Favorite = (props: { mealId: string }) => {
-    const model = MealsModel.getInstance();
+    const model = MealsService.getInstance();
     const [ isFavorite, setIsFavorite ] = useState<boolean>(model.isFavorite(props.mealId));
 
     
@@ -59,15 +59,15 @@ const RenderList = (props: { items: string[]; title: string; numbered?: boolean 
 export const MealDetailsScreen: React.FunctionComponent<MealDetailsInput> = (props: MealDetailsInput) => {
     const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
     const [ loading, setLoading ] = useState<boolean>(true);
-    const [ meal, setMeal ] = useState<IMealModel>();
+    const [ meal, setMeal ] = useState<MealModel>();
     const Styles = MealDetailsScreenStyles(screenData);
 
     useEffect(() => {
         const mealId = props.route.params?.mealId;
-        const model = MealsModel.getInstance();
+        const model = MealsService.getInstance();
         setLoading(true);
         model.getItem(mealId).subscribe(
-            (item: IMealModel) => {
+            (item: MealModel) => {
                 setMeal(item);
                 setLoading(false);
                 props.navigation.setOptions({

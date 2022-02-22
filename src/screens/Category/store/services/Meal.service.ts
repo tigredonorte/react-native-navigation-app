@@ -1,13 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { delay, Observable, of } from 'rxjs';
 
-import { IMealModel } from './Meal.interface';
-import { MealsListMock } from './Meal.mocks';
+import { MealModel } from '../models/Meal.model';
+import { MealsListMock } from '../data/Meal.mocks';
 
-export class MealsModel {
+export class MealsService {
 
     private favorites: {[s: string]: boolean} = {};
-    private static model = new MealsModel();
+    private static model = new MealsService();
     private constructor() {
         this.initFavorites();
     }
@@ -25,12 +25,12 @@ export class MealsModel {
         return this.model;
     }
 
-    public loadData = (categoryId: string): Observable<IMealModel[]> => {
+    public loadData = (categoryId: string): Observable<MealModel[]> => {
         const items = [...MealsListMock].filter(it => it.categoryIds.includes(categoryId));
         return this.fakeRequest(of(items));
     }
 
-    public getItem = (mealId: string): Observable<IMealModel> => {
+    public getItem = (mealId: string): Observable<MealModel> => {
         const item = [...MealsListMock].find(it => it.id === mealId);
         return this.fakeRequest(of(item));
     }
