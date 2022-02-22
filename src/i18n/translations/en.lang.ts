@@ -6,6 +6,7 @@ export const en: typeof pt = {
     title: "Meals Categories",
   },
   Category: {
+    Title: 'Categories',
     Details: 'Details',
     Status: {
       Error: {
@@ -28,8 +29,11 @@ export const en: typeof pt = {
   Favorites: {
     HelloWorld: "Favorites screen works",
   },
-  Filters: {
+  ['Filter/Home']: {
     title: "Filters",
+  },
+  Filter: {
+    Title: "Filters",
     HelloWorld: "Filter screen works",
   },
   MealDetails: {

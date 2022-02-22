@@ -1,4 +1,5 @@
 export enum CategoryRoutes {
+    Home = "Home",
     Category = "Category",
     CategoryHome = "Category/Home",
     Meals = "Category/Meals",
@@ -11,10 +12,15 @@ export enum FavoriteRoutes {
     FavoritesHome = "Favorites/Home",
 }
 
+export enum FilterRoutes {
+    Filter = "Filter",
+    FilterHome = "Filter/Home",
+}
+
 export type CategoryStackType = {
     [CategoryRoutes.CategoryHome]: {};
     [CategoryRoutes.Meals]: { id: string; };
     [CategoryRoutes.MealDetails]: { mealId: string; };
-    [CategoryRoutes.Filter]: {};
     [FavoriteRoutes.FavoritesHome]: {};
+    [FilterRoutes.FilterHome]: {};
 };

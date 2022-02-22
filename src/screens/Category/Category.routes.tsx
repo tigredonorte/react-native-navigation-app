@@ -1,13 +1,15 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Platform } from 'react-native';
+import { View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { LogoImage } from '~components/Navigation';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 import { theme } from '~styles/theme';
 
-import { CategoryRoutes, FavoriteRoutes } from './Category.route.types';
+import { CustomDrawerContent } from './Category.drawer';
+import { CategoryRoutes, FavoriteRoutes, FilterRoutes } from './Category.route.types';
 import { CategoryScreen } from './screens/Category/Category.screen';
 import { CategoryMealsScreen } from './screens/CategoryMeals/CategoryMeals.screen';
 import { FavoritesScreen } from './screens/Favorites/Favorites.screen';
@@ -16,8 +18,44 @@ import { MealDetailsScreen } from './screens/MealDetails/MealDetails.screen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export const CategoryRouteData = () : React.ReactElement => {
+  return (
+      <Drawer.Navigator
+        initialRouteName={CategoryRoutes.Home}
+        drawerContent={(props): React.ReactElement => <CustomDrawerContent {...props} />}
+        screenOptions={{ headerShown: false }}
+      >
+        <Drawer.Screen 
+          name={CategoryRoutes.Home} 
+          component={HomeGetRoutes}
+          options={() => ({
+            title: i18n.t('Category.Title'),
+            drawerIcon: ({ size, color }): React.ReactNode => (<IconButton icon='home' size={20} color={color}/>)
+          })}
+        />
+        <Drawer.Screen 
+          name={FilterRoutes.Filter} 
+          component={FilterGetRoutes}
+          options={() => ({
+            title: i18n.t('Filter.Title'),
+            drawerIcon: ({ size, color }): React.ReactNode => (<IconButton icon='home' size={20} color={color}/>)
+          })}
+        />
+      </Drawer.Navigator>
+  );
+}
+
+const defaultScreenOptions = {
+  headerStyle: {
+      backgroundColor: theme.colors.primary,
+  },
+  headerTintColor: theme.colors.white,
+  headerTitle: (data: any) => (<TText style={{color: 'white'}}> {i18n.t(`${data.children}.title`)}</TText>),
+};
+
+function HomeGetRoutes() : React.ReactElement {
   return (
     <Tab.Navigator 
       initialRouteName={CategoryRoutes.Category}
@@ -36,58 +74,34 @@ export const CategoryRouteData = () : React.ReactElement => {
         },
     })}
     >
-      <Tab.Screen
-          name={CategoryRoutes.Category}
-          component={CategoryGetRoutes}
-      />
-      <Tab.Screen
-        name={FavoriteRoutes.Favorites}
-        component={FavoritesGetRoutes}
-      />
+      <Tab.Screen name={CategoryRoutes.Category} component={CategoryGetRoutes} />
+      <Tab.Screen name={FavoriteRoutes.Favorites} component={FavoritesGetRoutes} />
     </Tab.Navigator>
   );
 }
 
-const defaultScreenOptions = {
-  headerStyle: {
-      backgroundColor: theme.colors.primary,
-  },
-  headerTintColor: theme.colors.white,
-  headerTitle: (data: any) => {
-      let title = i18n.t(`${data.children}.title`);
-      if (title === `${data.children}.title`) {
-          title = data.children;
-      }
-      return <TText style={{color: 'white'}}> {i18n.t(title)}</TText>
-  },
-};
+const screenOptions = ({ navigation }: any) => ({
+  headerLeft: () => (
+    <View style={{flexDirection: 'row'}}>
+      <IconButton icon='menu' onPress={() => navigation.openDrawer()} />
+      <LogoImage />
+    </View>
+  ),
+});
 
 function CategoryGetRoutes() : React.ReactElement {
   return (
-      <Stack.Navigator 
+      <Stack.Navigator
         screenOptions={defaultScreenOptions} 
         initialRouteName={CategoryRoutes.CategoryHome}
       >
         <Stack.Screen
           name={CategoryRoutes.CategoryHome}
           component={CategoryScreen}
-          options={{
-            headerLeft: () => <LogoImage />,
-          }}
+          options={screenOptions}
         />
-        <Stack.Screen
-          name={CategoryRoutes.Meals}
-          component={CategoryMealsScreen}
-        />
-         <Stack.Screen
-          name={CategoryRoutes.MealDetails}
-          component={MealDetailsScreen}
-        />
-
-        <Stack.Screen
-          name={CategoryRoutes.Filter}
-          component={FilterScreen}
-        />
+        <Stack.Screen name={CategoryRoutes.Meals} component={CategoryMealsScreen}/>
+        <Stack.Screen name={CategoryRoutes.MealDetails} component={MealDetailsScreen} />
       </Stack.Navigator>
   );
 };
@@ -101,9 +115,23 @@ function FavoritesGetRoutes() : React.ReactElement {
         <Stack.Screen
           name={FavoriteRoutes.FavoritesHome}
           component={FavoritesScreen}
-          options={{
-            headerLeft: () => <LogoImage />,
-          }}
+          options={screenOptions}
+        />
+      </Stack.Navigator>
+  );
+}
+
+
+function FilterGetRoutes() : React.ReactElement {
+  return (
+    <Stack.Navigator
+      screenOptions={defaultScreenOptions}
+      initialRouteName={FilterRoutes.FilterHome}
+    >
+        <Stack.Screen
+          name={FilterRoutes.FilterHome}
+          component={FilterScreen}
+          options={screenOptions}
         />
       </Stack.Navigator>
   );

@@ -4,6 +4,7 @@ export const pt = {
     title: "Categorias",
   },
   Category: {
+    Title: 'Categorias',
     Details: 'Detalhes',
     Status: {
       Error: {
@@ -26,8 +27,11 @@ export const pt = {
   Favorites: {
     HelloWorld: "A página de Favoritos funciona!"
   },
-  Filters: {
-    title: "Filters",
+  ['Filter/Home']: {
+    title: "Filtro",
+  },
+  Filter: {
+    Title: "Filtros",
     HelloWorld: "A página de Filtros funciona!"
   },
   MealDetails: {
