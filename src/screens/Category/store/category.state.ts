@@ -3,14 +3,14 @@ import { MealsListMock } from './data/Meal.mocks';
 import { CategoryModel } from './models/Category.model';
 import { MealModel } from './models/Meal.model';
 
-export interface CategoryState {
+export interface MealsState {
     categories: CategoryModel[];
     meals: MealModel[];
     filteredMeals: MealModel[];
-    favorites: MealModel[];
+    favorites: string[];
 };
 
-export const initialState: CategoryState = {
+export const initialState: MealsState = {
     categories: CategoryListMock,
     meals: MealsListMock,
     filteredMeals: MealsListMock,

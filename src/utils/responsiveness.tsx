@@ -1,6 +1,6 @@
 import React from "react";
 import { Dimensions } from "react-native";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, distinctUntilChanged, map, Observable } from "rxjs";
 
 const sizes = {
     'h1': 3,
@@ -85,3 +85,7 @@ export const getScreenDimensions = () => {
     });
     return obj.asObservable();
 }
+
+export function getStyle<T>(StyleFn: (data: ScreenData) => T) {
+    return getScreenDimensions().pipe(distinctUntilChanged(), map(StyleFn))
+} 

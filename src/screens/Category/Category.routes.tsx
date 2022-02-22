@@ -52,7 +52,15 @@ const defaultScreenOptions = {
       backgroundColor: theme.colors.primary,
   },
   headerTintColor: theme.colors.white,
-  headerTitle: (data: any) => (<TText style={{color: 'white'}}> {i18n.t(`${data.children}.title`)}</TText>),
+  headerTitle: (data: any) => {
+    let title = i18n.t(`${data.children}.title`);
+    if (title === `${data.children}.title`) {
+      title = data.children;
+    }
+    return (
+      <TText style={{color: 'white'}}> {title}</TText>
+    )
+  },
 };
 
 function HomeGetRoutes() : React.ReactElement {

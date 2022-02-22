@@ -3,11 +3,11 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { IconButton, Switch, Title } from 'react-native-paper';
-import { distinctUntilChanged } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 import { theme } from '~styles/theme';
-import { getScreenDimensions } from '~utils/responsiveness';
+import { getScreenDimensions, getStyle } from '~utils/responsiveness';
 
 import { CategoryRoutes, CategoryStackType, FilterRoutes } from '../../Category.route.types';
 import { FilterScreenStyles, SwitchStyle } from './Filter.styles';
@@ -30,8 +30,7 @@ export const FilterScreen: React.FunctionComponent<FilterScreenInput> = (props: 
     const [ isVegan, setIsVegan ] = useState(false);
     const [ isVegetarian, setIsVegetarian ] = useState(false);
     const [ isLactoseFree, setIsLactoseFree ] = useState(false);
-    const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
-    const Styles = FilterScreenStyles(screenData);
+    const [ Styles ] = useObservable(getStyle(FilterScreenStyles));
 
     const saveFilters = useCallback(() => props.navigation.setParams({ 
         filters: {isGlutenFree, isVegan, isVegetarian, isLactoseFree} 

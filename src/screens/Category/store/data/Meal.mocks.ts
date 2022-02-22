@@ -3,7 +3,7 @@ import { MealModel } from "../models/Meal.model";
 export const MealsListMock: MealModel[] = [
     {
       id: 'm1',
-      categoryIds: ['c1', 'c2'],
+      categoryIds: ['c1'],
       title: 'Spaghetti with Tomato Sauce',
       affordability: 'affordable',
       complexity: 'simple',

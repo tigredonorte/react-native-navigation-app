@@ -3,19 +3,20 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { Caption, Card } from 'react-native-paper';
-import { distinctUntilChanged } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs';
 import { FetchStateEmpty } from '~components/FetchStatus/components/FetchStateEmpty';
 import { FetchStateLoading } from '~components/FetchStatus/components/FetchStateLoading';
 import { i18n } from '~i18n';
 import { CategoryRoutes, CategoryStackType } from '~screens/Category/Category.route.types';
-import { getScreenDimensions } from '~utils/responsiveness';
-
+import { getScreenDimensions, getStyle } from '~utils/responsiveness';
+import { useSelector } from 'react-redux';
 import { MealItem } from '../../components/MealsItem/MealsItem.component';
 import { CategoryModel } from '../../store/models/Category.model';
 import { getItemById } from '../../store/data/Category.mocks';
 import { MealModel } from '../../store/models/Meal.model';
 import { MealsService } from '../../store/services/Meal.service';
 import { CategoryMealsScreenStyles } from './CategoryMeals.styles';
+import { MealsState } from '~screens/Category/store/category.state';
 
 export interface CategoryScreenInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.Meals> { }
 
@@ -30,60 +31,40 @@ export const CategoryHeader = (props: { item: CategoryModel }) => {
 
 export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> = (props: CategoryScreenInput) => {
     
-    const [ item, setItem ] = useState<CategoryModel>();
-    const [ loadingMeals, setLoadingMeals ] = useState<boolean>(true);
-    const [ meals, setMeals ] = useState<MealModel[]>([]);
-    const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
-    const Styles = CategoryMealsScreenStyles(screenData);
+    const id = props.route.params?.id;
+    const category = useSelector((state: { meals: MealsState }) => state.meals.categories.find(cat => cat.id === id))
+    const meals = useSelector((state: { meals: MealsState }) => state.meals.meals.filter(meal => meal.categoryIds.indexOf(id) !== -1));
+    const [ Styles ] = useObservable(getStyle(CategoryMealsScreenStyles));
+
+    useEffect(() => {
+        props.navigation.setOptions({
+            title: i18n.t(category?.title ?? ''),
+            headerStyle: {
+                backgroundColor: category?.color,
+            },
+        });
+    }, [category]);
 
     const navigate = (mealId: string) => {
         props.navigation.navigate(CategoryRoutes.MealDetails, { mealId });
     }
 
-    useEffect(() => {
-        const item = getItemById(props.route.params?.id);
-        props.navigation.setOptions({
-            title: i18n.t(item?.title ?? ''),
-            headerStyle: {
-                backgroundColor: item?.color,
-            },
-        });
-
-        const mealsModel = MealsService.getInstance();
-        setLoadingMeals(true);
-        mealsModel.loadData(item?.id ?? '').subscribe(data => {
-            setMeals(data);
-            setLoadingMeals(false);
-        });
-        setItem(item);
-    }, []);
-
-
-    if (!item) {
+    if (!category) {
         return (
             <FetchStateEmpty
                 isEmpty={true}
-                emptyText={i18n.t('CategoryMeals.EmptyTitle', { id: props.route.params?.id })}
+                emptyText={i18n.t('CategoryMeals.EmptyTitle', { id })}
             ></FetchStateEmpty>
-        );
-    }
-
-    if (loadingMeals) {
-        return (
-            <>
-                <CategoryHeader item={item} />
-                <FetchStateLoading isLoading={true}></FetchStateLoading>
-            </>
         );
     }
 
     if (meals?.length === 0) {
        return (
         <>
-            <CategoryHeader item={item} />
+            <CategoryHeader item={category} />
             <FetchStateEmpty
                 isEmpty={true}
-                emptyText={i18n.t('CategoryMeals.EmptyItems', { id: props.route.params?.id })}
+                emptyText={i18n.t('CategoryMeals.EmptyItems', { id })}
             ></FetchStateEmpty>
         </>
        )
@@ -94,10 +75,10 @@ export const CategoryMealsScreen: React.FunctionComponent<CategoryScreenInput> =
             numColumns={1}
             data={meals}
             keyExtractor={(meal: MealModel) => meal.id}
-            ListHeaderComponent={() => (<CategoryHeader item={item} />)}
+            ListHeaderComponent={() => (<CategoryHeader item={category} />)}
             renderItem={(meal) => <MealItem
                 item={meal.item} 
-                color={item.color} 
+                color={category.color} 
                 onPress={navigate}
             />
         }

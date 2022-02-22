@@ -2,40 +2,30 @@ import { useObservable } from '@ngneat/react-rxjs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { Caption, Card, Headline, IconButton, Subheading, Title } from 'react-native-paper';
-import { distinctUntilChanged } from 'rxjs';
+import { Card, IconButton, Subheading, Title } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
 import { FetchStateEmpty } from '~components/FetchStatus/components/FetchStateEmpty';
 import { FetchStateLoading } from '~components/FetchStatus/components/FetchStateLoading';
-import { LogoImage } from '~components/Navigation';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
 import { InfoChip } from '~screens/Category/components/MealsItem/MealsItem.component';
+import { ToggleFavoriteAction } from '~screens/Category/store/meals.actions';
+import { getMealById, getMealIsFavorite } from '~screens/Category/store/meals.selectors';
 import { theme } from '~styles/theme';
-import { getScreenDimensions } from '~utils/responsiveness';
+import { getStyle } from '~utils/responsiveness';
 
 import { CategoryRoutes, CategoryStackType } from '../../Category.route.types';
-import { MealModel } from '../../store/models/Meal.model';
-import { MealsService } from '../../store/services/Meal.service';
 import { ListStyles, MealDetailsScreenStyles } from './MealDetails.styles';
 
-export interface MealDetailsInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.MealDetails> {
+export interface MealDetailsInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.MealDetails> {}
 
-}
-
-export const Favorite = (props: { mealId: string }) => {
-    const model = MealsService.getInstance();
-    const [ isFavorite, setIsFavorite ] = useState<boolean>(model.isFavorite(props.mealId));
-
-    
+export const Favorite = (props: { mealId: string; isFavorite: boolean; toggleFavorite: () => void }) => {    
     return (
         <IconButton
-            icon={isFavorite ? 'heart' : 'heart-outline'}
+            icon={props.isFavorite ? 'heart' : 'heart-outline'}
             color={theme.colors.white}
             size={20}
-            onPress={() => {
-                model.toggleFavorite(props.mealId);
-                setIsFavorite(model.isFavorite(props.mealId));
-            }}
+            onPress={props.toggleFavorite}
         />
     );
 }
@@ -57,32 +47,30 @@ const RenderList = (props: { items: string[]; title: string; numbered?: boolean 
 }
 
 export const MealDetailsScreen: React.FunctionComponent<MealDetailsInput> = (props: MealDetailsInput) => {
-    const [ screenData ] = useObservable(getScreenDimensions().pipe(distinctUntilChanged()));
-    const [ loading, setLoading ] = useState<boolean>(true);
-    const [ meal, setMeal ] = useState<MealModel>();
-    const Styles = MealDetailsScreenStyles(screenData);
+    const [ Styles ] = useObservable(getStyle(MealDetailsScreenStyles));
+    const meal = useSelector(getMealById(props.route.params.mealId));
+    const isFavorite = useSelector(getMealIsFavorite(props.route.params.mealId));
+    const dispatch = useDispatch();
+    const toggleFavorite = () => dispatch(ToggleFavoriteAction(props.route.params.mealId));
 
     useEffect(() => {
-        const mealId = props.route.params?.mealId;
-        const model = MealsService.getInstance();
-        setLoading(true);
-        model.getItem(mealId).subscribe(
-            (item: MealModel) => {
-                setMeal(item);
-                setLoading(false);
-                props.navigation.setOptions({
-                    title: item.title,
-                    headerRight: () => <Favorite mealId={item.id} />,
-                });
-            }
-        );
-    }, []);
-
-    if (loading) {
-        return (<FetchStateLoading isLoading={true}></FetchStateLoading>);
-    }
+        props.navigation.setOptions({
+            title: meal?.title,
+            headerRight: () => <Favorite 
+                mealId={meal?.id || ''} 
+                isFavorite={ isFavorite } 
+                toggleFavorite={toggleFavorite}
+            />,
+        });
+    }, [ meal, isFavorite ]);
 
     if (!meal) {
+        return (
+            <FetchStateLoading isLoading={true}></FetchStateLoading>
+        );
+    }
+
+    if (!meal.id) {
         return (
             <FetchStateEmpty
                 isEmpty={true}

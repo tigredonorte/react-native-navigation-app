@@ -8,6 +8,9 @@ export const en: typeof pt = {
   Category: {
     Title: 'Categories',
     Details: 'Details',
+    Empty: {
+      Title: 'Categories not found!'
+    },
     Status: {
       Error: {
         Title: 'Falha ao listar as categorias!',
@@ -27,7 +30,10 @@ export const en: typeof pt = {
     title: "Favoritos",
   },
   Favorites: {
-    HelloWorld: "Favorites screen works",
+    Empty: {
+      Title: "You don't have any favorites!",
+      Button: "See Meals"
+    }
   },
   ['Filter/Home']: {
     title: "Filters",

@@ -7,7 +7,7 @@ import { initStyle, loadFonts } from '~utils/style';
 import { Provider as ReduxProvider } from 'react-redux';
 
 import { createStore, combineReducers } from 'redux';
-import { mealsReducer } from '~screens/Category/store/reducers/meals.reducer';
+import { mealsReducer } from '~screens/Category/store/meals.reducer';
 
 const store = createStore(
   combineReducers({

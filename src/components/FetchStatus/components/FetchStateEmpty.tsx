@@ -5,12 +5,12 @@ import { TText } from '~components/TText/TText.component';
 import { Styles } from './FetchState.style';
 
 export interface FetchStateEmptyInput {
-    isEmpty: boolean;
+    isEmpty?: boolean;
     onEmptyData?: () => void; 
     emptyText?: string;
     emptyBtnText?: string;
 }
-export const FetchStateEmpty = (props: FetchStateEmptyInput) => {
+export const FetchStateEmpty = (props: FetchStateEmptyInput = { isEmpty: true }) => {
     return props.isEmpty ? (
         <View style={Styles.stateContainer}>
             { 

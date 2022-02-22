@@ -6,6 +6,9 @@ export const pt = {
   Category: {
     Title: 'Categorias',
     Details: 'Detalhes',
+    Empty: {
+      Title: 'Nenhuma categoria encontrada!'
+    },
     Status: {
       Error: {
         Title: 'Falha ao listar as categorias!',
@@ -25,7 +28,10 @@ export const pt = {
     title: "Favoritos",
   },
   Favorites: {
-    HelloWorld: "A página de Favoritos funciona!"
+    Empty: {
+      Title: "Você não possui favoritos!",
+      Button: "Ver Receitas"
+    }
   },
   ['Filter/Home']: {
     title: "Filtro",

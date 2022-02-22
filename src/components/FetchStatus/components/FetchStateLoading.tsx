@@ -11,9 +11,9 @@ const Styles = StyleSheet.create({
 });
 
 export interface FetchStateLoadingInput {
-    isLoading: boolean
+    isLoading?: boolean;
 }
-export const FetchStateLoading = (props: FetchStateLoadingInput) => {
+export const FetchStateLoading = (props: FetchStateLoadingInput = { isLoading: true}) => {
     return props.isLoading ? (
         <View style={Styles.stateContainer}>
             <ActivityIndicator size="large" />
