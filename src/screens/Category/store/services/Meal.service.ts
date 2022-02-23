@@ -6,20 +6,7 @@ import { MealsListMock } from '../data/Meal.mocks';
 
 export class MealsService {
 
-    private favorites: {[s: string]: boolean} = {};
     private static model = new MealsService();
-    private constructor() {
-        this.initFavorites();
-    }
-    private async initFavorites() {
-        try {
-            const data = await AsyncStorage.getItem('Favorites');
-            const parsed = JSON.parse(data || '');
-            this.favorites = parsed;
-        } catch (error) {
-            this.favorites = {};
-        }
-    }
 
     public static getInstance() {
         return this.model;
@@ -48,11 +35,5 @@ export class MealsService {
         const list = [...MealsListMock].filter(it => favoriteIds.includes(it.id));
         return this.fakeRequest(of(list));
     }
-    public isFavorite = (mealId: string) => this.favorites[mealId];
-    public toggleFavorite = (mealId: string) => {
-        this.favorites[mealId] = !this.favorites[mealId];
-        AsyncStorage.setItem('Favorites', JSON.stringify(this.favorites));
-    }
-
     private fakeRequest = (observer: Observable<any>): Observable<any> => observer.pipe(delay(300 + Math.random() * 500));
 }
