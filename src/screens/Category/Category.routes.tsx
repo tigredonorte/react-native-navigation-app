@@ -9,11 +9,12 @@ import { i18n } from '~i18n';
 import { theme } from '~styles/theme';
 
 import { CustomDrawerContent } from './Category.drawer';
-import { CategoryRoutes, FavoriteRoutes, FilterRoutes } from './Category.route.types';
+import { CategoryRoutes } from './Category.route.types';
 import { CategoryScreen } from './screens/Category/Category.screen';
 import { CategoryMealsScreen } from './screens/CategoryMeals/CategoryMeals.screen';
 import { FavoritesScreen } from './screens/Favorites/Favorites.screen';
 import { FilterScreen } from './screens/Filter/Filter.screen';
+import { FilteredScreen } from './screens/Filtered/Filtered.screen';
 import { MealDetailsScreen } from './screens/MealDetails/MealDetails.screen';
 
 const Stack = createStackNavigator();
@@ -36,7 +37,7 @@ export const CategoryRouteData = () : React.ReactElement => {
           })}
         />
         <Drawer.Screen 
-          name={FilterRoutes.Filter} 
+          name={CategoryRoutes.Filter} 
           component={FilterGetRoutes}
           options={() => ({
             title: i18n.t('Filter.Title'),
@@ -74,7 +75,7 @@ function HomeGetRoutes() : React.ReactElement {
           const _color = focused ? theme.colors.primary: theme.colors.very_light_grey
           return (
             <IconButton
-              icon={route.name === FavoriteRoutes.Favorites ? 'heart' : 'home'}
+              icon={route.name === CategoryRoutes.Favorites ? 'heart' : 'home'}
               color={_color}
               size={size}
             />
@@ -83,12 +84,12 @@ function HomeGetRoutes() : React.ReactElement {
     })}
     >
       <Tab.Screen name={CategoryRoutes.Category} component={CategoryGetRoutes} />
-      <Tab.Screen name={FavoriteRoutes.Favorites} component={FavoritesGetRoutes} />
+      <Tab.Screen name={CategoryRoutes.Favorites} component={FavoritesGetRoutes} />
     </Tab.Navigator>
   );
 }
 
-const screenOptions = ({ navigation }: any) => ({
+const ScrrenOptionsWithMenu = ({ navigation }: any) => ({
   headerLeft: () => (
     <View style={{flexDirection: 'row'}}>
       <IconButton icon='menu' color={theme.colors.light_grey} onPress={() => navigation.openDrawer()} />
@@ -106,7 +107,7 @@ function CategoryGetRoutes() : React.ReactElement {
         <Stack.Screen
           name={CategoryRoutes.CategoryHome}
           component={CategoryScreen}
-          options={screenOptions}
+          options={ScrrenOptionsWithMenu}
         />
         <Stack.Screen name={CategoryRoutes.Meals} component={CategoryMealsScreen}/>
         <Stack.Screen name={CategoryRoutes.MealDetails} component={MealDetailsScreen} />
@@ -118,12 +119,12 @@ function FavoritesGetRoutes() : React.ReactElement {
   return (
     <Stack.Navigator
       screenOptions={defaultScreenOptions}
-      initialRouteName={FavoriteRoutes.FavoritesHome}
+      initialRouteName={CategoryRoutes.FavoritesHome}
     >
         <Stack.Screen
-          name={FavoriteRoutes.FavoritesHome}
+          name={CategoryRoutes.FavoritesHome}
           component={FavoritesScreen}
-          options={screenOptions}
+          options={ScrrenOptionsWithMenu}
         />
       </Stack.Navigator>
   );
@@ -135,12 +136,16 @@ function FilterGetRoutes() : React.ReactElement {
     <Provider theme={theme}>
       <Stack.Navigator
         screenOptions={defaultScreenOptions}
-        initialRouteName={FilterRoutes.FilterHome}
+        initialRouteName={CategoryRoutes.FilterHome}
       >
           <Stack.Screen
-            name={FilterRoutes.FilterHome}
+            name={CategoryRoutes.FilterHome}
             component={FilterScreen}
-            options={screenOptions}
+            options={ScrrenOptionsWithMenu}
+          />
+          <Stack.Screen
+            name={CategoryRoutes.Filtered}
+            component={FilteredScreen}
           />
         </Stack.Navigator>
     </Provider>

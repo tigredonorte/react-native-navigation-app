@@ -8,11 +8,13 @@ export interface MealsState {
     meals: MealModel[];
     filteredMeals: MealModel[];
     favorites: string[];
+    filters: { [s: string]: boolean },
 };
 
 export const initialState: MealsState = {
     categories: CategoryListMock,
     meals: MealsListMock,
     filteredMeals: MealsListMock,
+    filters: {},
     favorites: []
 }

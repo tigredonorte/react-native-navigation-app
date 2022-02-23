@@ -35,12 +35,20 @@ export const en: typeof pt = {
       Button: "See Meals"
     }
   },
+  Filtered: {
+    PageTitle: 'Filtered',
+    Empty: {
+      Title: "You don't have any filtered items!",
+      Button: "Filters page"
+    }
+  },
   ['Filter/Home']: {
     title: "Filters",
   },
   Filter: {
     Title: "Filters",
-    PageTitle: "Search the recipe"
+    PageTitle: "Search the recipe",
+    Amount: "{{amount}} Items found"
   },
   MealDetails: {
     title: "Meal Details",

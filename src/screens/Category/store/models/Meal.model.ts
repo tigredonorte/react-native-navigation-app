@@ -8,7 +8,7 @@ export interface MealModel {
     duration: number;
     ingredients: string[];
     steps: string[];
-    isGlutenFreen: boolean;
+    isGlutenFree: boolean;
     isVegan: boolean;
     isVegetarian: boolean;
     isLactoseFree: boolean;

@@ -16,7 +16,7 @@ import { getItemById } from '../../store/data/Category.mocks';
 import { MealModel } from '../../store/models/Meal.model';
 import { MealsService } from '../../store/services/Meal.service';
 import { CategoryMealsScreenStyles } from './CategoryMeals.styles';
-import { MealsState } from '~screens/Category/store/category.state';
+import { MealsState } from '~screens/Category/store/meals.state';
 
 export interface CategoryScreenInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.Meals> { }
 

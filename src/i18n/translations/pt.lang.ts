@@ -27,6 +27,13 @@ export const pt = {
   ['Favorites/Home']: {
     title: "Favoritos",
   },
+  Filtered: {
+    PageTitle: 'Filtrados',
+    Empty: {
+      Title: "Você não tem nenhum item filtrado",
+      Button: "Filtrar"
+    }
+  },
   Favorites: {
     Empty: {
       Title: "Você não possui favoritos!",
@@ -38,7 +45,8 @@ export const pt = {
   },
   Filter: {
     Title: "Filtros",
-    PageTitle: "Buscar Receita"
+    PageTitle: "Buscar Receita",
+    Amount: "{{amount}} Itens encontrados",
   },
   MealDetails: {
     title: "Detalhes da receita",

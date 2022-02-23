@@ -26,7 +26,7 @@ export const MealsListMock: MealModel[] = [
         'The sauce will be done once the spaghetti are.',
         'Feel free to add some cheese on top of the finished dish.'
       ],
-      isGlutenFreen: false,
+      isGlutenFree: false,
       isVegan: true,
       isVegetarian: true,
       isLactoseFree: true
@@ -51,7 +51,7 @@ export const MealsListMock: MealModel[] = [
         'Layer ham, the pineapple and cheese on the white bread',
         'Bake the toast for round about 10 minutes in the oven at 200°C'
       ],
-      isGlutenFreen: false,
+      isGlutenFree: false,
       isVegan: false,
       isVegetarian: false,
       isLactoseFree: false
@@ -79,7 +79,7 @@ export const MealsListMock: MealModel[] = [
         'Bruch buns with ketchup',
         'Serve burger with tomato, cucumber and onion'
       ],
-      isGlutenFreen: false,
+      isGlutenFree: false,
       isVegan: false,
       isVegetarian: false,
       isLactoseFree: true
@@ -111,7 +111,7 @@ export const MealsListMock: MealModel[] = [
         'Remove, and drain on kitchen paper. Fry the parsley in the remaining oil and drain.',
         'Place the schnitzels on awarmed plate and serve garnishedwith parsley and slices of lemon.'
       ],
-      isGlutenFreen: false,
+      isGlutenFree: false,
       isVegan: false,
       isVegetarian: false,
       isLactoseFree: false
@@ -142,7 +142,7 @@ export const MealsListMock: MealModel[] = [
         'Prepare the salad',
         'Add salmon cubes and dressing'
       ],
-      isGlutenFreen: true,
+      isGlutenFree: true,
       isVegan: false,
       isVegetarian: true,
       isLactoseFree: true
@@ -174,7 +174,7 @@ export const MealsListMock: MealModel[] = [
         'Cool down again for at least 4 hours',
         'Serve with orange peel'
       ],
-      isGlutenFreen: true,
+      isGlutenFree: true,
       isVegan: false,
       isVegetarian: true,
       isLactoseFree: false
@@ -202,7 +202,7 @@ export const MealsListMock: MealModel[] = [
         'Heat a lightly oiled griddle or frying pan over medium high heat.',
         'Pour or scoop the batter onto the griddle, using approximately 1/4 cup for each pancake. Brown on both sides and serve hot.'
       ],
-      isGlutenFreen: true,
+      isGlutenFree: true,
       isVegan: false,
       isVegetarian: true,
       isLactoseFree: false
@@ -232,7 +232,7 @@ export const MealsListMock: MealModel[] = [
         'Add coconut milk',
         'Serve with rice'
       ],
-      isGlutenFreen: true,
+      isGlutenFree: true,
       isVegan: false,
       isVegetarian: false,
       isLactoseFree: true
@@ -278,7 +278,7 @@ export const MealsListMock: MealModel[] = [
         'Stop mixing after the egg white disappears. Divide mixture between 2 prepared ramekins. Place ramekins on prepared baking sheet.',
         'Bake in preheated oven until scuffles are puffed and have risen above the top of the rims, 12 to 15 minutes.'
       ],
-      isGlutenFreen: true,
+      isGlutenFree: true,
       isVegan: false,
       isVegetarian: true,
       isLactoseFree: false
@@ -307,7 +307,7 @@ export const MealsListMock: MealModel[] = [
         'Mix with asparagus, salad and dressing',
         'Serve with Baguette'
       ],
-      isGlutenFreen: true,
+      isGlutenFree: true,
       isVegan: true,
       isVegetarian: true,
       isLactoseFree: true

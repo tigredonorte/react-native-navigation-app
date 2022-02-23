@@ -5,15 +5,16 @@ import { Routes } from '~routes/routes';
 import { theme } from '~styles/theme';
 import { initStyle, loadFonts } from '~utils/style';
 import { Provider as ReduxProvider } from 'react-redux';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, combineReducers } from 'redux';
 import { mealsReducer } from '~screens/Category/store/meals.reducer';
+import { env } from '~environments';
 
-const store = createStore(
-  combineReducers({
-    meals: mealsReducer
-  })
-);
+const reducers = combineReducers({
+  meals: mealsReducer
+});
+
+const store = createStore(reducers, !env.production? composeWithDevTools(): undefined);
 
 /**
  * It's important on huge app to improve performance

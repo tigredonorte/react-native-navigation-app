@@ -13,7 +13,7 @@ void i18next.init(
       'pt' :
       NativeModules.I18nManager.localeIdentifier.slice(0, 2),
     fallbackLng: Object.keys(langs),
-    load: 'currentOnly',
+    load: 'languageOnly',
     resources: {
       'en': {
         translation: langs.en,

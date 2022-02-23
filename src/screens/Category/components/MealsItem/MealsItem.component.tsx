@@ -26,7 +26,7 @@ export const MealItem: React.FunctionComponent<MealItemInput> = (props: MealItem
     const navigate = (source: string) => props.onPress(props.item.id, source);
 
     return (
-        <Card style={ItemStyles.listItem}>
+        <Card style={ItemStyles.listItem} onPress={() => navigate('card')}>
             <Title>{props.item.title}</Title>
             <View style={ItemStyles.textContainer}>
                 <Card.Cover  source={{uri: props.item.imageUrl}} />
@@ -37,7 +37,7 @@ export const MealItem: React.FunctionComponent<MealItemInput> = (props: MealItem
                 </View>
             </View>
             <View style={ItemStyles.chipContainer}>
-                <InfoChip condition={props.item.isGlutenFreen} title='GlutenFree' />
+                <InfoChip condition={props.item.isGlutenFree} title='GlutenFree' />
                 <InfoChip condition={props.item.isVegan} title='Vegan' />
                 <InfoChip condition={props.item.isVegetarian} title='Vegetarian' />
                 <InfoChip condition={props.item.isLactoseFree} title='LactoseFree' />

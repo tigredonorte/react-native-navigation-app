@@ -10,7 +10,7 @@ import { CategoryRoutes } from '~screens/Category/Category.route.types';
 import { getStyle } from '~utils/responsiveness';
 
 import { CategoryItem } from '../../components/CategoryItem/CategoryItem.component';
-import { MealsState } from '../../store/category.state';
+import { MealsState } from '../../store/meals.state';
 import { CategoryModel } from '../../store/models/Category.model';
 import { CategoryStyles } from './Category.styles';
 

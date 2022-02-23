@@ -1,15 +1,18 @@
 import { useObservable } from '@ngneat/react-rxjs';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { IconButton, Switch, Title } from 'react-native-paper';
-import { distinctUntilChanged, map } from 'rxjs';
+import { useDispatch, useSelector } from 'react-redux';
+import { FetchStateLoading } from '~components/FetchStatus/components/FetchStateLoading';
 import { TText } from '~components/TText/TText.component';
 import { i18n } from '~i18n';
+import { SetFiltersAction } from '~screens/Category/store/meals.actions';
+import { getFilteredMeal, getFilters } from '~screens/Category/store/meals.selectors';
 import { theme } from '~styles/theme';
-import { getScreenDimensions, getStyle } from '~utils/responsiveness';
+import { getStyle } from '~utils/responsiveness';
 
-import { CategoryRoutes, CategoryStackType, FilterRoutes } from '../../Category.route.types';
+import { CategoryRoutes, CategoryStackType } from '../../Category.route.types';
 import { FilterScreenStyles, SwitchStyle } from './Filter.styles';
 
 export interface FilterScreenInput extends NativeStackScreenProps<CategoryStackType, CategoryRoutes.FilterHome> { }
@@ -26,41 +29,63 @@ export const FilterSwitch = (props: { title: string; value: boolean; onValueChan
 export const FilterScreen: React.FunctionComponent<FilterScreenInput> = (props: FilterScreenInput) => {
 
     const { navigation } = props;
-    const [ isGlutenFree, setIsGlutenFree ] = useState(false);
-    const [ isVegan, setIsVegan ] = useState(false);
-    const [ isVegetarian, setIsVegetarian ] = useState(false);
-    const [ isLactoseFree, setIsLactoseFree ] = useState(false);
+    const filters = useSelector(getFilters);
+    const amount = useSelector((state: any) => getFilteredMeal(state)?.length);
     const [ Styles ] = useObservable(getStyle(FilterScreenStyles));
-
-    const saveFilters = useCallback(() => props.navigation.setParams({ 
-        filters: {isGlutenFree, isVegan, isVegetarian, isLactoseFree} 
-    }), [{ isGlutenFree, isVegan, isVegetarian, isLactoseFree }]);
+    const dispatch = useDispatch();
+    const setFilter = (key: string) => (value: boolean) => dispatch(
+        SetFiltersAction({...filters, [key]: value})
+    );
 
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
                 <IconButton
-                    icon='content-save'
+                    icon={amount > 0 ? 'content-save' : 'content-save-outline'}
                     color={theme.colors.light_grey}
                     size={20}
-                    onPress={() => {
-                        saveFilters();
-                        // @ts-ignore
-                        props.navigation.navigate(CategoryRoutes.CategoryHome);
-                    }}
+                    onPress={
+                        amount > 0 
+                        ? () => props.navigation.navigate(CategoryRoutes.Filtered, {})
+                        : undefined
+                    }
                 />
             )
         });
-    }, [ saveFilters ]);
+    }, [ amount ]);
+
+    
+    if (!filters) {
+        return (<FetchStateLoading></FetchStateLoading>);
+    }
 
     return (
         <View style={Styles.container}>
             <Title>{i18n.t('Filter.PageTitle')}</Title>
             <View style={Styles.formSection}>
-                <FilterSwitch title='Content.Labels.GlutenFree' value={isGlutenFree} onValueChange={setIsGlutenFree}/>
-                <FilterSwitch title='Content.Labels.Vegan' value={isVegan} onValueChange={setIsVegan}/>
-                <FilterSwitch title='Content.Labels.Vegetarian' value={isVegetarian} onValueChange={setIsVegetarian}/>
-                <FilterSwitch title='Content.Labels.LactoseFree' value={isLactoseFree} onValueChange={setIsLactoseFree}/>
+                <FilterSwitch
+                    title='Content.Labels.GlutenFree' 
+                    value={filters?.isGlutenFree} 
+                    onValueChange={setFilter('isGlutenFree')}
+                />
+                <FilterSwitch
+                    title='Content.Labels.Vegan'
+                    value={filters?.isVegan} 
+                    onValueChange={setFilter('isVegan')}
+                />
+                <FilterSwitch
+                    title='Content.Labels.Vegetarian' 
+                    value={filters?.isVegetarian} 
+                    onValueChange={setFilter('isVegetarian')}
+                />
+                <FilterSwitch
+                    title='Content.Labels.LactoseFree' 
+                    value={filters?.isLactoseFree} 
+                    onValueChange={setFilter('isLactoseFree')}
+                />
+            </View>
+            <View>
+                <TText>{i18n.t('Filter.Amount', { amount })}</TText>
             </View>
         </View>
     );

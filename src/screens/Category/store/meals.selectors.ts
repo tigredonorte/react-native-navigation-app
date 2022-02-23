@@ -1,4 +1,4 @@
-import { MealsState } from "./category.state";
+import { MealsState } from "./meals.state";
 
 interface MealsFullState {
     meals: MealsState;
@@ -15,3 +15,5 @@ export const getFavorites = (state: MealsFullState) => {
     const mealsState = getMealsState(state);
     return mealsState.meals.filter(meal => mealsState.favorites.includes(meal.id));
 }
+export const getFilters = (state: MealsFullState) => getMealsState(state).filters;
+export const getFilteredMeal = (state: MealsFullState) => getMealsState(state).filteredMeals;
